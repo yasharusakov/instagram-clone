@@ -1,0 +1,139 @@
+@import '../../../styles/variables';
+
+.upload-media-popup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 0;
+  }
+  &__upload {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &.next {
+      flex-direction: row;
+      @media screen and (max-width: 635px){
+        flex-direction: column;
+      }
+    }
+    &-drag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      &.drag-active {
+        border: 4px dashed $border-color;
+      }
+    }
+    &__media {
+      flex: auto;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      img, video {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    &-title {
+      font-weight: 300;
+      font-size: 22px;
+      margin-top: 10px;
+    }
+    &-button {
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 4px;
+      color: $white;
+      background: $submit-button;
+      padding: 5px 9px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      &:disabled, &:active {
+        opacity: .5;
+      }
+      input {
+        cursor: pointer;
+        font-size: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+    }
+    &__data {
+      flex: 0 1 340px;
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      &__user {
+        display: flex;
+        &__user-avatar {
+          min-width: 28px;
+          min-height: 28px;
+          max-width: 28px;
+          max-height: 28px;
+          img {
+            min-width: 28px;
+            min-height: 28px;
+            max-width: 28px;
+            max-height: 28px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        &__username {
+          font-weight: 600;
+          margin-left: 15px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      &__signature {
+        margin-top: 10px;
+        flex: 1 1 auto;
+        textarea {
+          width: 100%;
+          height: 100%;
+          resize: none;
+        }
+      }
+      &__buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        > button {
+          &:first-child {
+            background: $grey;
+          }
+          flex: 50%
+        }
+      }
+    }
+  }
+}

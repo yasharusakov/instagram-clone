@@ -1,0 +1,257 @@
+@import "../../styles/variables";
+
+.user {
+  width: 100%;
+  height: 100%;
+  &__container {
+    max-width: 975px;
+    margin: 0 auto;
+  }
+  hr {
+    width: 100%;
+    height: 1px;
+    background: $border-color;
+    margin: 20px 0;
+  }
+  &__info {
+    &__container {
+      display: flex;
+    }
+    &__additional-lower__same, &__buttons-same {
+      display: none;
+      margin-top: 10px;
+      word-wrap: anywhere;
+    }
+    &__buttons-same {
+      .user__info__user__data__metadata__buttons__button__edit-profile {
+        flex: 0 1 100%;
+      }
+      a, button{
+        flex: 0 1 50%;
+      }
+      .subscribe {
+        flex: 0 1 50%;
+        &__button {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+    &__user-avatar {
+      flex: 0 0 303px;
+      height: 180px;
+      position: relative;
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 150px;
+        min-height: 150px;
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    &__user__data {
+      display: grid;
+      width: 100%;
+      &__metadata {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        &__username {
+          margin-right: 15px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-weight: 300;
+          font-size: 28px;
+        }
+        &__buttons {
+          display: flex;
+          min-width: 0;
+          &__button {
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: $black;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 9px;
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            &__send-message {
+              margin-right: 5px;
+            }
+            &:active {
+              opacity: .5;
+            }
+          }
+        }
+      }
+      &__additional {
+        max-width: 500px;
+        margin-top: 35px;
+        display: flex;
+        min-width: 0;
+        justify-content: space-between;
+        > div {
+          min-width: 0;
+          flex: 0 1 auto;
+          display: flex;
+          text-align: center;
+          > div:nth-child(1) {
+            font-weight: 600;
+            margin-right: 5px;
+          }
+          > div:nth-child(2) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        &__subscribers {
+          margin: 0 40px;
+          cursor: pointer;
+        }
+        &__subscriptions {
+          cursor: pointer;
+        }
+      }
+      &__additional-lower {
+        margin-top: 5px;
+        display: grid;
+      }
+      &__user-fullname {
+        font-weight: 600;
+        font-size: 16px;
+      }
+      &__user-biography {}
+      &__user-link {
+        cursor: pointer;
+        font-weight: 600;
+        color: $ig-link;
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    @media screen and (max-width: 735px) {
+      &__container {
+        align-items: center;
+      }
+      &__user-avatar {
+        margin-right: 30px;
+        flex: 0 0 77px;
+        min-width: 77px;
+        min-height: 77px;
+        max-width: 77px;
+        max-height: 77px;
+        img {
+          min-width: 77px;
+          min-height: 77px;
+          max-width: 77px;
+          max-height: 77px;
+        }
+      }
+      &__user__data {
+        &__metadata {
+          order: 2;
+          display: none;
+        }
+        &__additional {
+          max-width: 350px;
+          margin-top: 0;
+          order: 1;
+          > div {
+            flex-direction: column;
+          }
+          &__subscribers {
+            margin: 0 15px;
+          }
+        }
+        &__additional-lower {
+          display: none;
+        }
+      }
+      &__additional-lower__same {
+        display: grid;
+      }
+      &__buttons-same {
+        display: flex;
+      }
+    }
+    @media screen and (max-width: 750px){
+      padding: 0 15px;
+    }
+  }
+  &__media {
+    &__nothing {
+      padding: 0 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+      &__title {
+        font-weight: 600;
+        font-size: 24px;
+        color: $black;
+      }
+      &__sub-title {
+        margin-top: 10px;
+        color: $grey;
+        font-weight: 400;
+        font-size: 16px;
+      }
+      &__button-share {
+        margin-top: 10px;
+        font-weight: 400;
+        font-size: 16px;
+        color: $submit-button;
+        cursor: pointer;
+      }
+    }
+    &__media {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+      @media screen and (max-width: 735px){
+        grid-gap: 5px;
+      }
+      &__media-item {
+        background: $black;
+        border: 1px solid $border-color;
+        user-select: none;
+        position: relative;
+        padding-bottom: 100%;
+        img, video {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        svg {
+          width: 18px;
+          height: 18px;
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          z-index: 10;
+          filter: drop-shadow(0 0 5px $black);
+        }
+      }
+    }
+  }
+}

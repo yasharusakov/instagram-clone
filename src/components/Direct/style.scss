@@ -1,0 +1,208 @@
+@import "../../styles/variables";
+
+.direct {
+  width: 100%;
+  height: 100%;
+  &__container {
+    max-width: 975px;
+    margin: 0 auto;
+    background: $white;
+    border: 1px solid $border-color;
+    min-height: calc(100vh - 180px);
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    border-radius: 4px;
+    @media screen and (max-width: 750px){
+      grid-template-columns: 1fr;
+    }
+  }
+  &__data {
+    border-right: 1px solid $border-color;
+    &__header {
+      padding: 0 20px;
+      height: 60px;
+      border-bottom: 1px solid $border-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      &__username {
+        font-weight: 600;
+        font-size: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        color: $black;
+      }
+    }
+    &__users {
+      overflow: hidden;
+      overflow-y: auto;
+      height: calc(100vh - 183px - 60px);
+      @media screen and (max-width: 750px){
+        height: 100%;
+      }
+      &__user {
+        cursor: pointer;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        padding: 8px 20px;
+        &__user-avatar {
+          flex: 0 0 70px;
+          justify-self: flex-start;
+          img {
+            min-width: 56px;
+            max-width: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        &__additional {
+          overflow: hidden;
+          &__username {
+            font-weight: 400;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: $black;
+          }
+        }
+        &:hover {
+          background: $main-color;
+        }
+        &.active {
+          background: rgb(235, 235, 235);
+        }
+      }
+    }
+  }
+  &__chat {
+    display: flex;
+    &__nothing {
+      text-align: center;
+      padding: 24px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      > div, > svg {
+        margin-bottom: 10px;
+      }
+      &__title {
+        font-weight: 300;
+        font-size: 22px;
+      }
+      &__sub-title {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grey;
+      }
+      &__send-message {
+        background: $submit-button;
+        color: $white;
+        padding: 5px 9px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 0;
+        &:active {
+          opacity: .5;
+        }
+      }
+    }
+    &__main {
+      width: 100%;
+      height: 100%;
+      &__header {
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        border-bottom: 1px solid $border-color;
+        &__user-avatar {
+          flex: 0 0 24px;
+          img {
+            min-width: 24px;
+            max-width: 24px;
+            min-height: 24px;
+            max-height: 24px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        &__username {
+          color: $black;
+          margin-left: 15px;
+          font-weight: 700;
+          &:active {
+            opacity: .5;
+          }
+        }
+      }
+    }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      &__messages {
+        padding: 20px 20px 0 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        overflow-y: auto;
+        height: calc(100vh - 120px - 60px - 84px - 60px);
+        &::-webkit-scrollbar { width: 0; }
+        -ms-overflow-style: none;
+      }
+      &__message {
+        user-select: none;
+        transition: 0.4s ease;
+        max-width: 235px;
+        align-self: flex-start;
+        padding: 16px;
+        background: rgb(235, 235, 235);
+        border-radius: 22px;
+        font-weight: 400;
+        font-size: 14px;
+        word-wrap: break-word;
+        margin-bottom: 10px;
+      }
+      &__send-message {
+        height: 84px;
+        padding: 20px;
+        &__container {
+          border: 1px solid $border-color;
+          border-radius: 22px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 16px;
+        }
+        input {
+          width: 100%;
+          height: 100%;
+          background: none;
+          &:disabled {
+            opacity: .5;
+          }
+        }
+        button {
+          color: $submit-button;
+          padding: 0 8px;
+          cursor: pointer;
+          &:disabled {
+            cursor: default;
+            opacity: .5;
+          }
+        }
+      }
+    }
+  }
+}

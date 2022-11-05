@@ -1,0 +1,201 @@
+@import '../../../styles/variables';
+
+.stories-popup {
+  width: 100%;
+  height: 100%;
+  background: rgba(#737373, 0.99);
+  position: relative;
+  overflow: hidden;
+  &__video-controls {
+    display: flex;
+    align-items: center;
+    svg {
+      cursor: pointer;
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+  &__close {
+    svg {
+      cursor: pointer;
+    }
+  }
+  &__progress-bar {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    &__container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    &__bar {
+      height: 2px;
+      flex: 1 1 auto;
+      position: relative;
+      &__line {
+        width: inherit;
+        height: 2px;
+        background: $border-color;
+      }
+      &__fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 2px;
+        width: 0;
+        background: $white;
+      }
+    }
+  }
+  &__user {
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__user-data {
+      display: flex;
+      align-items: center;
+    }
+    &__picture {
+      position: relative;
+      cursor: pointer;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      img {
+        width: 34px;
+        height: 34px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      svg {
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: $white;
+        border-radius: 50%;
+        transform: scale(0.8);
+      }
+    }
+    &__username, &__date-of-public {
+      margin-left: 10px;
+      color: $white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    &__date-of-public {
+      cursor: default;
+      color: $border-color;
+    }
+  }
+  .swiper {
+    width: inherit;
+    height: inherit;
+    &-button-prev, &-button-next {
+      top: 0;
+      height: 100vh;
+      width: 30%;
+    }
+    &-button-prev {
+      left: 0;
+    }
+    &-button-next {
+      right: 0;
+    }
+    &-slide {
+      user-select: none;
+      position: relative;
+      background: rgba(#737373, 0.99);
+      img, video {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        object-fit: contain;
+        user-select: none;
+      }
+    }
+  }
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+  &__file {
+    width: 100%;
+    height: 100%;
+    img, video {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: contain;
+    }
+  }
+  &__add {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    align-self: center;
+    background: $submit-button;
+    color: $white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:disabled, &:active {
+      opacity: .5;
+    }
+  }
+  &__choose {
+    cursor: pointer;
+    align-self: center;
+    position: relative;
+    background: $submit-button;
+    color: $white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:disabled, &:active {
+      opacity: .5;
+    }
+    input {
+      cursor: pointer;
+      font-size: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import "../../../styles/variables";
+
+.instagram-loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  z-index: 1000;
+  &__container {
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  &__instagram-icon {
+    margin: auto 0;
+    img {
+      width: 77px;
+      height: 77px;
+    }
+  }
+  &__meta-icon {
+    img {
+      width: 88px;
+      height: 65px;
+    }
+  }
+}

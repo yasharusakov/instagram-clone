@@ -1,0 +1,133 @@
+@import '../../styles/variables';
+
+.popup {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: 0.3s ease;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    transition: 0.2s ease;
+  }
+  &__content {
+    background: $white;
+    overflow: hidden;
+    border-radius: 10px;
+    width: clamp(300px, 100%, 400px);
+    height: clamp(300px, 100%, 400px);
+    &.UploadMedia {
+      width: clamp(300px, 80%, 740px);
+      height: clamp(300px, 80%, 740px);
+    }
+    &.AdditionalMedia {
+      width: clamp(250px, 70%, 340px);
+      height: auto;
+    }
+    &.CommentsPopup {
+      width: clamp(300px, 80%, 500px);
+      height: clamp(300px, 80%, 740px);
+    }
+    &.StoriesPopup {
+      width: clamp(300px, 100%, 400px);
+      height: 100%;
+      border-radius: 0;
+    }
+    @media screen and (max-width: 465px) {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      &.UploadMedia, &.CommentsPopup {
+        width: 100%;
+        height: 100%;
+      }
+      &.AdditionalMedia {
+        width: clamp(300px, 80%, 90%);
+        height: auto;
+        border-radius: 10px;
+      }
+      &.ShowUsersPopup {
+        width: clamp(300px, 90%, 400px);
+        height: clamp(300px, 90%, 400px);
+        border-radius: 10px;
+      }
+    }
+  }
+  &__control-panel {
+    padding: 15px 30px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: $border-color;
+    }
+    &__title {
+      font-size: 22px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-right: 10px;
+    }
+    &__close {
+      font-size: 19px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+  }
+  &__main {
+    background: $white;
+    padding: 15px 30px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 60px);
+    &.UploadMedia, &.AdditionalMedia, &.StoriesPopup, &.ShowUsersPopup {
+      padding: 0;
+    }
+    &.StoriesPopup, &.ShowUsersPopup {
+      height: 100%;
+    }
+  }
+  &.StoriesPopup {
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      background: rgba(#262626, 0.97);
+      .popup__container {
+        transform: scale(1);
+      }
+    }
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    background: rgba(0,0,0,0.8);
+    .popup__container {
+      transform: scale(1);
+    }
+  }
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    .popup__container {
+      transform: scale(0.7);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.comments-popup {
+  width: 100%;
+  height: 100%;
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  &__comments {
+    overflow-y: auto;
+  }
+  .media__add-comment {
+    display: flex;
+  }
+}

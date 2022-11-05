@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.footer {
+    padding: 60px 0;
+    &__container {
+      padding: 0 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      @media screen and (max-width: 450px) {
+        padding: 0;
+      }
+    }
+    &__links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      li {
+        margin: 5px;
+      }
+    }
+    &__link {
+      color: $link-color-footer;
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }

@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+.layout {
+  height: 100%;
+  &__container {
+    margin-top: 60px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    @media screen and (max-width: 750px){
+      padding: 0;
+    }
+  }
+  &__content {
+    flex: 1 1 auto;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+}
