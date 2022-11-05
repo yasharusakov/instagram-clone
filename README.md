@@ -1,3 +1,5 @@
+# Hosting URL: https://instagram-clonee-website1.web.app
+
 # Getting Started with Create React Index
 
 This project was bootstrapped with [Create React Index](https://github.com/facebook/create-react-app).
