@@ -3,29 +3,28 @@ import UploadMediaPopup from "../Popups/UploadMediaPopup"
 import CommentsPopup from "../Popups/CommentsPopup"
 import AdditionalMediaPopup from "../Popups/AdditionalMediaPopup"
 import StoriesPopup from "../Popups/StoriesPopup"
-
+import ShowUsersPopup from "../Popups/ShowUsersPopup"
 import './style.scss'
-import ShowUsersPopup from "../Popups/ShowUsersPopup";
 
 const Footer = () => {
+
+	const links = [
+		'Meta', 'Информация', 'Блог', 'Вакансии', 'Помощь', 'API',
+		'Конфиденциальность', 'Условия', 'Популярные аккаунты', 'Хэштеги',
+		'Места', 'Instagram Lite', 'Загрузка контактов и лица, не являющиеся пользователями'
+	]
 
     return (
         <footer className="footer">
 			<div className="footer__container">
 				<ul className="footer__links">
-					<li><a className="footer__link" href="#">Meta</a></li>
-					<li><a className="footer__link" href="#">Информация</a></li>
-					<li><a className="footer__link" href="#">Блог</a></li>
-					<li><a className="footer__link" href="#">Вакансии</a></li>
-					<li><a className="footer__link" href="#">Помощь</a></li>
-					<li><a className="footer__link" href="#">API</a></li>
-					<li><a className="footer__link" href="#">Конфиденциальность</a></li>
-					<li><a className="footer__link" href="#">Условия</a></li>
-					<li><a className="footer__link" href="#">Популярные аккаунты</a></li>
-					<li><a className="footer__link" href="#">Хэштеги</a></li>
-					<li><a className="footer__link" href="#">Места</a></li>
-					<li><a className="footer__link" href="#">Instagram Lite</a></li>
-					<li><a className="footer__link" href="#">Загрузка контактов и лица, не являющиеся пользователями</a></li>
+					{links.map((link, i) => {
+						return (
+							<li key={i}>
+								<a className="footer__link" href="#">{link}</a>
+							</li>
+						)
+					})}
 				</ul>
 				<ul className="footer__links">
 					<li><div className="footer__link">Русский</div></li>

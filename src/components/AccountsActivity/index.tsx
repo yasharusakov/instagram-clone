@@ -12,7 +12,7 @@ const AccountsActivity = () => {
     const [subscribers, setSubscribers] = useState<any[]>([])
 
     const removeDuplicates = (arr: any[]) => {
-        const obj: any = {}
+        const obj: {[key: string]: string} = {}
         arr.forEach((item) => {
             if (obj[item.uid]) return
             obj[item.uid] = item

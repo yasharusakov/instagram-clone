@@ -1,29 +1,24 @@
-import {ChangeEvent, FormEvent, useState} from 'react'
+import {FormEvent, useState} from 'react'
 import {Link} from "react-router-dom"
-import {signInWithEmailAndPassword, getAuth} from "firebase/auth"
+import AuthService from "../../services/auth-service"
 import DefaultLoader from "../Loaders/DefaultLoader"
 import instagram from "../../resources/images/instagram.png"
 import appstore from "../../resources/images/app-store.png"
 import googleplay from "../../resources/images/google-play.png"
-
 import '../../styles/notLoggedIn.scss'
 
 const Login = () => {
-    const auth = getAuth()
-
     const [loading, setLoading] = useState<boolean>(false)
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
-    const signIn = async (e: FormEvent<HTMLFormElement>) => {
+    const signIn = async (e: FormEvent) => {
         e.preventDefault()
 
         setLoading(true)
 
-        await signInWithEmailAndPassword(auth, email, password)
-            .catch(() => {
-                setLoading(false)
-            })
+        await AuthService.signIn(email, password)
+            .catch(() => setLoading(false))
 
         setEmail('')
         setPassword('')
@@ -39,10 +34,29 @@ const Login = () => {
                     </div>
                     <form onSubmit={signIn} className="not-logged-in__form">
                         <div className="not-logged__inputs">
-                            <input onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} value={email} type="email" autoComplete="off" placeholder="Эл. адрес" required className="not-logged-in__input"/>
-                            <input onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} value={password} type="password" minLength={6} autoComplete="off" placeholder="Пароль" required className="not-logged-in__input"/>
+                            <input
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                type="email"
+                                autoComplete="off" placeholder="Эл. адрес"
+                                required
+                                className="not-logged-in__input"
+                            />
+                            <input
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                type="password"
+                                minLength={6} autoComplete="off" placeholder="Пароль"
+                                required
+                                className="not-logged-in__input"
+                            />
                         </div>
-                        <button disabled={!(email && password)} type="submit" className="not-logged-in__submit">{loading ? <DefaultLoader/> : 'Войти'}</button>
+                        <button
+                            disabled={!(email && password)}
+                            type="submit"
+                            className="not-logged-in__submit">
+                            {loading ? <DefaultLoader/> : 'Войти'}
+                        </button>
                     </form>
                 </div>
                 <div className="not-logged-in__item not-logged-in__item_2">

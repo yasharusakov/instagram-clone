@@ -1,14 +1,13 @@
 import {FC, useEffect, useState, memo} from "react"
 import {useAppSelector} from "../../hooks/useAppSelector"
-import {fetchUser} from "../../utils/userFunctions"
+import UserService from "../../services/user-service"
 import {IUser} from "../../types/user"
 import Story from "../Story"
 import Subscribe from "../User/Subscribe"
 import {Link} from "react-router-dom"
-import {doc, getDoc, getFirestore} from "firebase/firestore"
 import {useActions} from "../../hooks/useActions"
+import {Timestamp} from "firebase/firestore"
 import moment from "moment"
-
 import './style.scss'
 
 interface UserItemProps {
@@ -17,25 +16,24 @@ interface UserItemProps {
 }
 
 const UserItem: FC<UserItemProps> = memo(({uid, showDate}) => {
-    const db = getFirestore()
     const me = useAppSelector(state => state.user.me)
     const [user, setUser] = useState<IUser>()
-    const [createdAt, setCreatedAt] = useState<any>()
+    const [createdAt, setCreatedAt] = useState<Timestamp | null>(null)
     const {setPopup} = useActions()
 
     useEffect(() => {
         if (!uid) return
-        fetchUser(uid, setUser)
+
+        UserService.getUser(uid)
+            .then(user => setUser(user))
+
     }, [uid])
 
     useEffect(() => {
         if (!showDate || !uid) return
 
-        const docRef = doc(db, `users/${me.uid}/subscribers/${uid}`)
-        getDoc(docRef)
-            .then(data => {
-                setCreatedAt(data.data()!.createdAt)
-            })
+        UserService.getSubscriber(me.uid, uid)
+            .then(user => user && setCreatedAt(user.createdAt))
 
     }, [showDate, uid])
 
@@ -45,7 +43,10 @@ const UserItem: FC<UserItemProps> = memo(({uid, showDate}) => {
                 <div className="user-item__story">
                     <Story options={{username: false}} uid={uid}/>
                 </div>
-                <Link onClick={() => setPopup({name: 'ShowUsersPopup', type: false, data: null})} to={`/${user?.username}`} className="user-item__additional">
+                <Link
+                    onClick={() => setPopup({name: 'ShowUsersPopup', type: false, data: null})}
+                    to={`/${user?.username}`}
+                    className="user-item__additional">
                     <div className="user-item__username">{user?.username}</div>
                     {
                         (showDate && createdAt?.seconds) ? (

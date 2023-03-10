@@ -13,8 +13,7 @@ import Like from "./Like"
 import defaultAvatar from '../../resources/images/default-avatar.jpg'
 import Likes from "./Likes"
 import moment from "moment"
-
-import {getUserUid} from "../../utils/userFunctions"
+import UserService from "../../services/user-service"
 
 import './style.scss'
 
@@ -41,14 +40,11 @@ const Media: FC<MediaProps> = ({mediaData}) => {
     const mediaID = id ? id : mediaData?.id
 
     useEffect(() => {
-        if (mediaData) {
-            setUid(mediaData.uid)
-            return
-        }
-
+        if (mediaData) return setUid(mediaData.uid)
         if (!username) return
 
-        (async () => await getUserUid(username, setUid))()
+        UserService.getUserUid(username)
+            .then(uid => uid && setUid(uid))
     }, [username])
 
     const fetchUser = () => {
@@ -71,8 +67,8 @@ const Media: FC<MediaProps> = ({mediaData}) => {
         const mediaRef = ref(storage, `users/${uid}/media/${mediaID}`)
 
         await deleteDoc(docRef)
-            .then(() => deleteObject(mediaRef))
-            .then(() => {
+            .then(async () => {
+                await deleteObject(mediaRef)
                 setPopup({name: 'AdditionalMedia', type: false, data: null})
                 navigate(`/${user?.username}`)
             })

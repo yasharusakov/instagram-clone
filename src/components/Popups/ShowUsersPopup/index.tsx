@@ -2,7 +2,7 @@ import {useAppSelector} from "../../../hooks/useAppSelector"
 import {useEffect, useState} from "react"
 import {collection, getDocs, getFirestore, orderBy, query} from "firebase/firestore"
 import {useActions} from "../../../hooks/useActions"
-import {fetchUser} from "../../../utils/userFunctions"
+import UserService from "../../../services/user-service"
 import {IUser} from "../../../types/user"
 import UserItem from "../../UserItem"
 
@@ -22,9 +22,10 @@ const ShowUsersPopup = () => {
             .then(data => data.docs.map(doc => ({uid: doc.id, ...doc.data()})))
             .then(data => {
                 data.forEach(({uid}) => {
-                    fetchUser(uid, (user) => {
-                        setUsers(users => [...users, user] as IUser[])
-                    })
+                    UserService.getUser(uid)
+                        .then(user => {
+                            setUsers(users => [...users, user] as IUser[])
+                        })
                 })
             })
     }

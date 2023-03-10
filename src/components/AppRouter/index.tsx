@@ -14,7 +14,7 @@ import Register from "../Register"
 import Media from "../Media"
 import ExploreSearch from "../ExploreSearch"
 import AccountsActivity from "../AccountsActivity"
-import {fetchUserInRealTime} from "../../utils/userFunctions"
+import UserService from "../../services/user-service"
 
 const AppRouter = () => {
     const {userState, auth, loading} = useAuthState()
@@ -22,7 +22,7 @@ const AppRouter = () => {
 
     useEffect(() => {
         if (!userState || !auth.currentUser?.uid) return
-        const user = fetchUserInRealTime(auth.currentUser?.uid!, 'me', setUser, setSubscribers, setSubscriptions)
+        const user = UserService.fetchUserInRealTime(auth.currentUser.uid, 'me', setUser, setSubscribers, setSubscriptions)
         return () => user.forEach(unsubscribe => unsubscribe())
     }, [userState])
 
