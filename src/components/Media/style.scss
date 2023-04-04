@@ -55,7 +55,7 @@
     &__username {
       font-size: 14px;
       font-weight: 600;
-      color: black;
+      color: #dbdbdb;
     }
     &__value {
       margin-left: 10px;
@@ -106,7 +106,7 @@
     &__username {
       font-size: 14px;
       font-weight: 600;
-      color: $black;
+      color: #dbdbdb;
       margin-left: 10px;
     }
     &_1 {
@@ -140,7 +140,7 @@
     max-width: 635px;
     max-height: inherit;
     border: 1px solid $border-color;
-    background: $black;
+    background: #dbdbdb;
     img, video {
       width: 100%;
       height: 100%;

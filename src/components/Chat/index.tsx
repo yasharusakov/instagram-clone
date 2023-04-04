@@ -1,10 +1,27 @@
-import {FC, FormEvent, memo, useEffect, useRef, useState, ChangeEvent} from "react"
-import {onSnapshot, doc, getFirestore, setDoc, query, collection, orderBy, serverTimestamp} from "firebase/firestore"
-import {IUser} from "../../types/user"
+import {
+    FC,
+    FormEvent,
+    memo,
+    useEffect,
+    useRef,
+    useState,
+    ChangeEvent,
+} from 'react'
+import {
+    onSnapshot,
+    doc,
+    getFirestore,
+    setDoc,
+    query,
+    collection,
+    orderBy,
+    serverTimestamp,
+} from 'firebase/firestore'
+import {IUser} from '../../types/user'
 import {Link} from 'react-router-dom'
 import defaultAvatar from '../../resources/images/default-avatar.jpg'
-import {IMessage} from "../../types/direct"
-import { v4 as uuidv4 } from 'uuid'
+import {IMessage} from '../../types/direct'
+import {v4 as uuidv4} from 'uuid'
 
 interface IChatProps {
     meID: string
@@ -28,7 +45,7 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
                 if (querySnapshot.exists()) {
                     setChatID(querySnapshot.data().chatID)
                 }
-            } catch(err) {
+            } catch (err) {
                 console.log(err)
             }
         })
@@ -52,9 +69,16 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
     useEffect(() => {
         if (!chatID) return
 
-        const q = query(collection(db, `chats/${chatID}/messages`), orderBy("createdAt"))
+        const q = query(
+            collection(db, `chats/${chatID}/messages`),
+            orderBy('createdAt')
+        )
         const unsub = onSnapshot(q, (querySnapshot) => {
-            setMessages(querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()} as IMessage)))
+            setMessages(
+                querySnapshot.docs.map(
+                    (doc) => ({id: doc.id, ...doc.data()} as IMessage)
+                )
+            )
         })
 
         return () => unsub()
@@ -65,11 +89,14 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
         messagesRef.current.scrollTo(0, messagesRef.current.scrollHeight)
 
         if (!messagesRef.current?.children.length) return
-        messagesRef.current?.children[messagesRef.current?.children.length - 1].classList.add('animation-to-bottom')
+        messagesRef.current?.children[
+            messagesRef.current?.children.length - 1
+        ].classList.add('animation-to-bottom')
     }, [messages])
 
     useEffect(() => {
-        const callback = () => messagesRef.current?.scrollTo(0, messagesRef.current?.scrollHeight)
+        const callback = () =>
+            messagesRef.current?.scrollTo(0, messagesRef.current?.scrollHeight)
         window.addEventListener('resize', callback)
         return () => window.removeEventListener('resize', callback)
     }, [])
@@ -82,7 +109,7 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
         await setDoc(doc(db, `chats/${chatID}/messages`, id), {
             meId: meID,
             value: message,
-            createdAt: serverTimestamp()
+            createdAt: serverTimestamp(),
         })
 
         setMessage('')
@@ -98,10 +125,19 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
     return (
         <div className="direct__chat__main">
             <header className="direct__chat__main__header">
-                <Link to={`/${user?.username}`} className="direct__chat__main__header__user-avatar">
-                    <img src={user?.avatar ? user.avatar : defaultAvatar} alt="Фото профиля"/>
+                <Link
+                    to={`/${user?.username}`}
+                    className="direct__chat__main__header__user-avatar"
+                >
+                    <img
+                        src={user?.avatar ? user.avatar : defaultAvatar}
+                        alt="Фото профиля"
+                    />
                 </Link>
-                <Link to={`/${user?.username}`} className="direct__chat__main__header__username">
+                <Link
+                    to={`/${user?.username}`}
+                    className="direct__chat__main__header__username"
+                >
                     {user?.username}
                 </Link>
             </header>
@@ -110,9 +146,18 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
                     {messages.map(({id, meId, value}) => {
                         return (
                             <div
-                                style={meId === meID ? {alignSelf: 'flex-end', background: '#0095F6', color: '#fff'} : {}}
+                                style={
+                                    meId === meID
+                                        ? {
+                                              alignSelf: 'flex-end',
+                                              background: '#0095F6',
+                                              color: '#fff',
+                                          }
+                                        : {}
+                                }
                                 key={id}
-                                className="direct__chat__form__message">
+                                className="direct__chat__form__message"
+                            >
                                 {value}
                             </div>
                         )
@@ -123,13 +168,16 @@ const Chat: FC<IChatProps> = memo(({meID, userID}) => {
                         <input
                             disabled={loading}
                             value={message}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                setMessage(e.target.value)
+                            }
                             placeholder="Напишите сообщение"
                         />
                         <button
                             disabled={loading || !message}
                             type="submit"
-                            className="direct__chat__form__send-message__submit">
+                            className="direct__chat__form__send-message__submit"
+                        >
                             Отправить
                         </button>
                     </div>

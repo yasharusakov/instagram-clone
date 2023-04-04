@@ -58,20 +58,21 @@ a:active {
 }
 
 body {
-  height: 100%;
+  overflow: hidden;
+  height: 100vh;
   background: $main-color;
-  scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 html {
-  height: 100%;
+  overflow: hidden;
+  height: 100vh;
 }
 
 #root {
-  height: 100%;
+  height: 100vh;
 }
 
 ul[class],

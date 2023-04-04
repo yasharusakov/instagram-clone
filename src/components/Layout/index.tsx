@@ -1,8 +1,9 @@
-import {ReactNode, ReactElement, FC} from "react"
+import {ReactNode, ReactElement, FC} from 'react'
 import Footer from '../Footer'
-import Header from "../Header"
+import Header from '../Header'
 
 import './style.scss'
+import SideBar from '../SideBar'
 
 interface BaseLayoutProps {
 	children: ReactNode | ReactElement
@@ -11,10 +12,10 @@ interface BaseLayoutProps {
 const Layout: FC<BaseLayoutProps> = ({children}) => {
 	return (
 		<div className="layout">
-			<Header/>
+			<SideBar />
 			<div className="layout__container">
 				<main className="layout__content">{children}</main>
-				<Footer/>
+				<Footer />
 			</div>
 		</div>
 	)
